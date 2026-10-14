@@ -1,0 +1,54 @@
+problems = []
+'''problems = [
+    {
+        "id": 1, "title": "两数之和", "topic": "哈希表", "difficulty": "简单",
+        "idea": "用字典记录已经遍历过的数", "complexity": "O(n) / O(n)",
+        "date": "2026-10-05", "reviewed": False
+    },
+]'''
+print("请输入命令，输入空格结束程序。")
+def order(): #命令判断行
+    while True:
+        require = input().split() #这里的命令是一连串的，其实不太合理，后期要修改
+        if  not require:
+            print("输入为空，程序已退出。")
+            break
+        for each in require:
+            if each == "add":
+                while True:
+                    res = {}
+                    print("请输入题号：")
+                    s = input()
+                    res["id"] =s
+                    print("请输入标题：")
+                    s = input()
+                    res["title"] = s
+                    print("请输入类型：")
+                    s = input()
+                    res["topic"] = s
+                    print("请输入难度：")
+                    s = input()
+                    res["difficulty"] = s
+                    print("请输入你的解题思路：")
+                    s = input()
+                    res["idea"] = s
+                    problems.append(res)
+                    print("添加题目成功！")
+                    print("是否继续添加题目？")
+                    s = input()
+                    if s == "是":
+                        continue
+                    else:
+                        break
+            elif each == "list":
+                show(each)
+            else:
+                print("未知命令")
+
+def show(command):#打印的流程都在这里
+    if command == "list":
+        for i in problems:
+            print(f"id: {i['id']:<4} title: {i['title']:<10} topic: {i['topic']:<10} difficulty: {i["difficulty"]:<10} \n idea: {i['idea']}")
+
+order()
+print(problems)
