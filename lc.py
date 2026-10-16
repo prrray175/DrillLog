@@ -1,4 +1,5 @@
-problems = []
+import json
+from pathlib import Path
 '''problems = [
     {
         "id": 1, "title": "两数之和", "topic": "哈希表", "difficulty": "简单",
@@ -7,6 +8,19 @@ problems = []
     },
 ]'''
 print("请输入命令，输入空格结束程序。")
+problems = []
+p = Path("problems.json")
+if not p.exists():
+    p.write_text("[]", encoding="utf-8")
+
+def load(): #从json中读取数据
+    with open("problems.json", 'r', encoding= 'utf-8') as f:
+         return json.load(f)
+
+def save(problem): #保存数据回json
+    with open('problems.json', 'w', encoding= 'utf-8')as f:
+        json.dump(problem, f, ensure_ascii=False, indent=4)
+
 def order(): #命令判断行
     while True:
         require = input().split() #这里的命令是一连串的，其实不太合理，后期要修改
@@ -50,5 +64,6 @@ def show(command):#打印的流程都在这里
         for i in problems:
             print(f"id: {i['id']:<4} title: {i['title']:<10} topic: {i['topic']:<10} difficulty: {i["difficulty"]:<10} \n idea: {i['idea']}")
 
+problems = load()#读取json文件中的数据
 order()
-print(problems)
+save(problems)

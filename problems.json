@@ -1,0 +1,16 @@
+[
+    {
+        "id": "2",
+        "title": "交换字符串",
+        "topic": "数组",
+        "difficulty": "medium",
+        "idea": "随便写写就做出来了"
+    },
+    {
+        "id": "4",
+        "title": "不交换字符串",
+        "topic": "数组",
+        "difficulty": "difficult",
+        "idea": "随便写写就做不出来了"
+    }
+]
