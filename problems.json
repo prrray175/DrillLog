@@ -4,13 +4,15 @@
         "title": "交换字符串",
         "topic": "数组",
         "difficulty": "medium",
-        "idea": "随便写写就做出来了"
+        "idea": "随便写写就做出来了",
+        "reviewed": false
     },
     {
-        "id": "4",
-        "title": "不交换字符串",
-        "topic": "数组",
+        "id": "3",
+        "title": "顶顶顶顶",
+        "topic": "双指针",
         "difficulty": "difficult",
-        "idea": "随便写写就做不出来了"
+        "idea": "随便写",
+        "reviewed": false
     }
 ]

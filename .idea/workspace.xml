@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="794e2620-cfd8-407c-8ee3-1fb0ba04c43a" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/刷题记录工具.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/刷题记录工具.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lc.py" beforeDir="false" afterPath="$PROJECT_DIR$/lc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/problems.json" beforeDir="false" afterPath="$PROJECT_DIR$/problems.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +16,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 8,

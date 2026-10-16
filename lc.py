@@ -46,7 +46,9 @@ def order(): #命令判断行
                     print("请输入你的解题思路：")
                     s = input()
                     res["idea"] = s
+                    res["reviewed"] = False
                     problems.append(res)
+
                     print("添加题目成功！")
                     print("是否继续添加题目？")
                     s = input()
@@ -56,14 +58,57 @@ def order(): #命令判断行
                         break
             elif each == "list":
                 show(each)
+            elif each == "done":
+                print("请输入你要done的题号：")
+                index = input()
+                nums = find(index)
+                if nums != False:
+                    print(nums)
+                    print("已修改为：")
+                    nums["reviewed"] = 'done'
+                    print(nums)
+            elif each == "del":
+                print("请输入你要del的题号：")
+                index = input()
+                find(index)
+                if del_problem(problems, index):
+                    print("成功删除！")
+                else:
+                    print("删除失败！")
             else:
                 print("未知命令")
 
 def show(command):#打印的流程都在这里
     if command == "list":
         for i in problems:
-            print(f"id: {i['id']:<4} title: {i['title']:<10} topic: {i['topic']:<10} difficulty: {i["difficulty"]:<10} \n idea: {i['idea']}")
+            print(f"id: {i['id']:<4} title: {i['title']:<10} topic: {i['topic']:<10} difficulty: {i["difficulty"]:<10} reviewed: {str(i['reviewed']):<10} \n idea: {i['idea']}")
+
+def find(index):#找题号为index的数据
+    for k in problems:
+        if k["id"] == index:
+            return k
+    else:
+        print("你输入的题号不存在！")
+        return False
+def add_reviewed(problem):
+    changed = 0
+    for p in problem:
+        if "reviewed" not in p:
+            p["reviewed"] = False
+            changed += 1
+
+    return changed
+
+def del_problem(problem, index):
+    kept = [p for p in problem if p["id"] != index]
+    if len(kept) == len(problem):
+        print("题号不存在！")
+        return False
+    else:
+        problem[:] = kept
+        return True
 
 problems = load()#读取json文件中的数据
 order()
+
 save(problems)
