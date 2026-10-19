@@ -33,7 +33,7 @@ def order(): #命令判断行
             require = input().split() #这里的命令是一连串的，其实不太合理，后期要修改
         except EOFError:
             print("输入流无可输出内容，请重新输入命令。")
-        try:
+        else:
             for each in require:
                 if each == "add":
                     while True:
@@ -49,6 +49,7 @@ def order(): #命令判断行
                                     break
                                 else:
                                     print("请重新输入题号")
+                            break
                         res["id"] =s
                         print("请输入标题：")
                         s = ask()
@@ -56,8 +57,13 @@ def order(): #命令判断行
                         print("请输入类型：")
                         s = ask()
                         res["topic"] = s
-                        print("请输入难度：")
-                        s = ask()
+                        print("请输入难度：( easy/medium/hard )")
+                        while True:
+                            s = ask()
+                            if s != 'easy' and s != 'medium' and s != 'hard':
+                                print("请输入正确的难度。")
+                                continue
+                            break
                         res["difficulty"] = s
                         print("请输入你的解题思路：")
                         s = ask()
@@ -72,7 +78,7 @@ def order(): #命令判断行
                         else:
                             break
                 elif each == "quit":
-                        raise
+                        return
                 elif each == "list":
                     show(each)
                 elif each == "done":
@@ -92,11 +98,35 @@ def order(): #命令判断行
                         print("成功删除！")
                     else:
                         print("删除失败！")
+
+                elif each == "stat":
+                    collections = {}
+                    level = {'hard': {},'medium': {},'easy': {}}
+                    done = 0
+                    sums = 0
+                    try:
+                        for e in problems:
+                            topic = e["topic"]
+                            di = e["difficulty"]
+                            collections[topic] = collections.get(topic, 0) + 1
+                            level[di][topic] = level[di].get(topic, 0) + 1 #按照难度统计不同类型题目数量
+                            sums += 1
+                            if e['reviewed'] == done:
+                                done += 1
+                        for q in collections:
+                            print(f"{q}类型的题目刷了{collections[q]}道。")
+                        print()
+                        for d in ['easy', 'medium', 'hard']:
+                            total = sum(level[d].values())
+                            print(f"{d}难度的题目共{total}道")
+                            for t, n in sorted(level[d].items(), key = lambda kv:(-kv[1], kv[0])):
+                                print(f"  {t:<8}{n}")
+                        print(f"已重做的题目数量为：{done}道")
+                        print(f"一共完成了{sums}道题目，再接再厉！")
+                    except Exception as e:
+                        print(type(e).__name__, e)
                 else:
                     print("未知命令")
-        except:
-                print("数据已保存，程序已退出。")
-                break
 
 def show(command):#打印的流程都在这里
     if command == "list":
@@ -137,5 +167,5 @@ idic = []
 for each in problems:
     idic.append(each["id"])
 order()
-
+print("程序即将退出，数据已保存")
 save(problems)
