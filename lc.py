@@ -1,5 +1,7 @@
 import json
 from pathlib import Path
+import unicodedata
+
 '''problems = [
     {
         "id": 1, "title": "两数之和", "topic": "哈希表", "difficulty": "简单",
@@ -8,6 +10,11 @@ from pathlib import Path
     },
 ]'''
 
+def dw(s):
+    return sum(2 if unicodedata.east_asian_width(c) in "WF" else 1 for c in s)
+
+def row(cmd, desc, w=18):#cmd:命令名 desc:说明，w = 18 默认宽度参数
+    return f"  {cmd}{' ' * (w - dw(cmd))}{desc}"
 
 def load(): #从json中读取数据
     with open("problems.json", 'r', encoding= 'utf-8') as f:
@@ -86,12 +93,13 @@ def done_():
 
 def del_():
     print("请输入你要del的题号：")
-    index = input()
-    find1(index)
-    if del_problem(problems, index):
-        print("成功删除！")
-    else:
-        print("删除失败！")
+    index = input().split()
+    for each in index:
+        find1(each)
+        if del_problem(problems, each):
+            print(f"{each}号题成功删除！")
+        else:
+            print(f"{each}题删除失败！")
     return
 
 def stat_():
@@ -142,8 +150,24 @@ def find_():
     except Exception as e:
         print(type(e).__name__, e)
 
+def help_():
+    print()
+    print("添加与修改")
+    print(row("add","添加一道题"))
+    print(row("done<题号>","标记为重做"))
+    print(row("del<题号>","删除一条记录"))
+    print()
+    print("查询")
+    print(row("list[类型]","列出全部题目/只看某一类型的题目"))
+    print(row("find<关键词/题号>","搜索题目"))
+    print()
+    print("其他")
+    print(row("stat","统计已做题目难度与类型"))
+    print(row("help/quit","查看帮助/退出"))
+    print()
 def judge():
     while True:#只有输入命令为'quit'时才会退出
+        print("请输入命令，输入quit结束程序。")
         requires = order()
         for each in requires:
             if each == "add":
@@ -151,7 +175,7 @@ def judge():
             elif each == "quit":
                 return
             elif each == "list":
-                show(each)
+                show()
             elif each == "done":
                 done_()
             elif each == "del":
@@ -160,21 +184,24 @@ def judge():
                 stat_()
             elif each == "find":
                 find_()
+            elif each == "help":
+                help_()
             else:
-                print("未知命令")
+                print("未知命令，输入help可查看帮助。")
 
 def order(): #命令输入行
     while True:
         try:
-            require = input().split() #这里的命令是一连串的，其实不太合理，后期要修改
+            require = input().split()
             return require
         except EOFError:
-            print("输入流无可输出内容，请重新输入命令。")
+            print("无可输出内容，请重新输入命令。")
 
-def show(command):#打印的流程都在这里
-    if command == "list":
-        for i in problems:
-            print(f"id: {i['id']:<4} topic: {i['topic']:<10} ")
+def show():#打印的流程都在这里
+    if not problems:
+        print("题库中无数据！")
+    for i in problems:
+        print(f"id: {i['id']:<4} topic: {i['topic']:<10} ")
 def find(k,mode):
     res = []
     if mode =="text":
@@ -212,7 +239,7 @@ def del_problem(problem, index):
 
 
 
-print("请输入命令，输入quit结束程序。")
+
 problems = []
 p = Path("problems.json")
 if not p.exists():
