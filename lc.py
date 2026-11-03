@@ -269,7 +269,6 @@ def backup_broken_file():
     except OSError as e:
         print(f"备份失败：{e}")
 
-
 problems = []
 if not DATA_FILE.exists():
     DATA_FILE.write_text("[]", encoding="utf-8")
