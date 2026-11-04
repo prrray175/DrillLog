@@ -55,8 +55,8 @@ def judge_id():
             return s
 
 def add_problem():
-    s = judge_id()
     while True:
+        s = judge_id()
         res = {}
         res["id"] = s
         print("请输入标题：")
