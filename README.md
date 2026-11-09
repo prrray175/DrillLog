@@ -37,7 +37,7 @@ DrillLog 把这些集中在一个 JSON 文件里，用几个短命令就能查�
 
 ## 用法示例
 
-（这里放截图）
+![screenshot.png](docs/screenshot.png)
 
 ## 数据存在哪
 
@@ -53,11 +53,7 @@ DrillLog 把这些集中在一个 JSON 文件里，用几个短命令就能查�
 - 列表只显示题号和类型，完整信息用 `find`
 - 只支持 Windows
 
-## 下一步打算
 
-- 打包成 exe，免安装 Python
-- 导出 CSV，方便用 Excel 看
-- 给题目加标签
 
 ## 开发过程
 
